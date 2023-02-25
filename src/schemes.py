@@ -112,3 +112,5 @@ class ProductMutationQuery(ObjectType):
     def resolve_product_updating(root: Any, info: dict, index: int) -> int:
         return index
 
+
+product_scheme = Schema(query=ProductHeadQuery, mutation=ProductMutationQuery)
