@@ -15,3 +15,9 @@ class Product:
 
 
 products: Final[list[Product]] = list() # It's a database :D
+
+products.extend([
+    Product("Orange", "Very delicious", Dollars(Decimal('5'))),
+    Product("Mandarin", "Also very delicious", Dollars(Decimal('3.5'))),
+    Product("Stick", "It's a stick", Dollars(Decimal('1')))
+])
