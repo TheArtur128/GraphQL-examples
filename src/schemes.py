@@ -35,3 +35,20 @@ class ProductHeadQuery(ObjectType):
     def resolve_product(root: Any, info: dict, index: int):
         return Indexed(products[index], index)
 
+
+class ProductCreation(Mutation):
+    class Arguments:
+        name = NonNull(String)
+        description = NonNull(String, default_value=str())
+        price = NonNull(Decimal)
+        amount = NonNull(Int, default_value=0)
+
+    index = NonNull(Int)
+
+    def mutate(root: Any, info: dict, name: str, price: Dollars, description: str, amount: int) -> Self:
+        created_product = Product(name, description, price, amount)
+
+        products.append(created_product)
+
+        return ProductCreation(index=len(products) - 1)
+
