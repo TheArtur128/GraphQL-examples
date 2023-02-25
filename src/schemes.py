@@ -86,3 +86,7 @@ class ProductUpdating(Mutation):
 
         return ProductUpdating(ok=True)
 
+
+class ProductUpdatingQuery(ObjectType):
+    update_product = ProductUpdating.Field()
+
