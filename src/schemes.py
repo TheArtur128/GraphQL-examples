@@ -90,3 +90,15 @@ class ProductUpdating(Mutation):
 class ProductUpdatingQuery(ObjectType):
     update_product = ProductUpdating.Field()
 
+
+class ProductDeleting(Mutation):
+    class Arguments:
+        index = NonNull(Int)
+
+    ok = NonNull(Boolean)
+
+    def mutate(root: Any, info: dict, index: int) -> Self:
+        products.pop(index)
+
+        return ProductDeleting(ok=True)
+
