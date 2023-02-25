@@ -52,3 +52,37 @@ class ProductCreation(Mutation):
 
         return ProductCreation(index=len(products) - 1)
 
+
+class ProductUpdating(Mutation):
+    class Arguments:
+        name = String()
+        description = String()
+        price = Decimal()
+        amount = Int()
+
+    ok = NonNull(Boolean)
+
+    def mutate(
+        product_index: int,
+        info: dict,
+        name: Optional[str] = None,
+        description: Optional[str] = None,
+        price: Optional[Dollars] = None,
+        amount: Optional[int] = None,
+    ) -> Self:
+        product = products[product_index]
+
+        if name is not None:
+            product.name = name
+
+        if description is not None:
+            product.description = description
+
+        if price is not None:
+            product.price = price
+
+        if amount is not None:
+            product.amount = amount
+
+        return ProductUpdating(ok=True)
+
