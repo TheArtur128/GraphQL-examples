@@ -102,3 +102,13 @@ class ProductDeleting(Mutation):
 
         return ProductDeleting(ok=True)
 
+
+class ProductMutationQuery(ObjectType):
+    create_product = ProductCreation.Field()
+    delete_product = ProductDeleting.Field()
+
+    product_updating = Field(ProductUpdatingQuery, index=NonNull(Int))
+
+    def resolve_product_updating(root: Any, info: dict, index: int) -> int:
+        return index
+
