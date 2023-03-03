@@ -1,6 +1,7 @@
 from typing import Any, Self, Optional
 
 from graphene import ObjectType, NonNull, Int, String, Decimal, Field, Mutation, Boolean, Schema
+from graphql.execution.execute import ExecutionResult
 
 from db import Product, Dollars, products
 from tools import Indexed
@@ -113,4 +114,11 @@ class ProductMutationQuery(ObjectType):
         return index
 
 
-product_scheme = Schema(query=ProductHeadQuery, mutation=ProductMutationQuery)
+    return {
+        "data": execution_result.data,
+        "errors": tuple(map(str, execution_result.errors if execution_result.errors else tuple()))
+    }
+
+
+product_schema = Schema(query=ProductHeadQuery, mutation=ProductMutationQuery)
+
