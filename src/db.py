@@ -11,7 +11,7 @@ class Product:
     name: str
     description: str
     price: Dollars
-    amount: int
+    amount: int = 0
 
 
 products: Final[list[Product]] = list() # It's a database :D
